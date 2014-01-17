@@ -14,3 +14,5 @@ parse_git_dirty() {
     [[ $CLEAN != "nothing to commit (working directory clean)" ]] && [[ $CLEAN != "nothing to commit, working directory clean" ]] && echo "*"
   fi
 }
+
+EDITOR=$(which vim)
