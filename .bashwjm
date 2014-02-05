@@ -14,3 +14,7 @@ parse_git_dirty() {
     [[ $CLEAN != "nothing to commit (working directory clean)" ]] && [[ $CLEAN != "nothing to commit, working directory clean" ]] && echo "*"
   fi
 }
+
+ldf() {
+    pdflatex $1 &>/dev/null && nohup evince ${1%tex}pdf &>/dev/null
+}
