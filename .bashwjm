@@ -16,7 +16,7 @@ parse_git_dirty() {
 }
 
 ldf() {
-    pdflatex $1 &>/dev/null && nohup evince ${1%tex}pdf &>/dev/null
+    pdflatex ${1%tex}tex 2>/dev/null </dev/null && nohup evince ${1%tex}pdf &>/dev/null
 }
 
 EDITOR=$(which vim)
