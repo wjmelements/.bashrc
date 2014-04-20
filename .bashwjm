@@ -9,7 +9,7 @@ parse_git_branch() {
 }
  
 parse_git_dirty() {
-  if [[ -d .git ]] && [[ $(git rev-parse --show-toplevel) != $HOME && $(git rev-parse --show-toplevel) != "$HOME/projects/gcc" ]]; then
+  if [[ -d .git ]] && [[ $(git rev-parse --show-toplevel) != $HOME ]] && [[ $(git rev-parse --show-toplevel) != "$HOME/projects/gcc" ]]; then
     CLEAN=$(git status | tail -n1)
     [[ $CLEAN != "nothing to commit (working directory clean)" ]] && [[ $CLEAN != "nothing to commit, working directory clean" ]] && echo "*"
   fi
