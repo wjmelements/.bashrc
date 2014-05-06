@@ -20,3 +20,6 @@ ldf() {
 }
 
 EDITOR=$(which vim)
+
+# aliases
+alias ls='ls --color=auto'
