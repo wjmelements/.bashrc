@@ -19,7 +19,7 @@ ldf() {
     pdflatex ${1%tex}tex 2>/dev/null </dev/null && nohup evince ${1%tex}pdf &>/dev/null
 }
 
-EDITOR=$(which vim)
+export EDITOR=$(which vim)
 
 # aliases
 alias ls='ls --color=auto'
