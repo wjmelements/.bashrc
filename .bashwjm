@@ -23,3 +23,4 @@ EDITOR=$(which vim)
 
 # aliases
 alias ls='ls --color=auto'
+alias mop='ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS'
