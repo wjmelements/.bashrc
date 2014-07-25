@@ -8,3 +8,4 @@ set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
 set autoindent
 runtime! ftplugin/man.vim
+colorscheme desert
