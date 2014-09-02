@@ -21,6 +21,7 @@ ldf() {
 }
 
 export EDITOR=$(which vim)
+export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 
 # aliases
 alias ls='ls --color=auto'
