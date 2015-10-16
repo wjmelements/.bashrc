@@ -24,5 +24,31 @@ export EDITOR=$(which vim)
 export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 
 # aliases
-alias ls='ls --color=auto'
+alias ls='ls -G'
 alias mop='ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS'
+alias cf='clang-format'
+gg() {
+    git grep -n "$*"
+}
+ff() {
+    clang-format $1 | diff - $1
+}
+v() {
+    vim "$*"
+}
+gb() {
+    if [ $# -eq 0 ]; then
+        git for-each-ref --sort=-committerdate refs/heads/ | head -n 5
+    else
+        git for-each-ref --sort=-committerdate refs/heads/ | head -n $1
+    fi
+}
+bp() {
+    $* &>/dev/null &
+}
+bpi() {
+    bp pod install
+}
+ofc() {
+    pkill -9 Xcode
+}
