@@ -52,3 +52,8 @@ bpi() {
 ofc() {
     pkill -9 Xcode
 }
+lines() {
+    echo +`git diff | grep ^+ | wc -l`
+    echo -`git diff | grep ^- | wc -l`
+}
+. ~/z/z.sh
