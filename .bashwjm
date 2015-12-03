@@ -56,4 +56,7 @@ lines() {
     echo +`git diff | grep ^+ | wc -l`
     echo -`git diff | grep ^- | wc -l`
 }
+todo() {
+    git grep "TODO\|FIXME\|XXX" | grep -v "Binary file"
+}
 . ~/z/z.sh
