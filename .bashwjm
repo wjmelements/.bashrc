@@ -27,20 +27,34 @@ export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 alias ls='ls -G'
 alias mop='ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS'
 alias cf='clang-format'
+alias gfom='git fetch origin master'
+alias gmo='git merge origin/master'
+alias gom='gfom && gmo'
+alias gc='git checkout'
+alias gcm='git checkout master'
+alias gou='git fetch origin `git symbolic-ref --short -q HEAD` && git merge origin/`git symbolic-ref --short -q HEAD`'
+alias gs='git status'
+cfi() {
+    clang-format -i "$*"
+}
 gg() {
     git grep -n "$*"
 }
+ggi() {
+    git grep -h "import .*$*" | head -n 1
+}
 ff() {
     clang-format $1 | diff - $1
+}
+gtfo() {
+    git fetch origin $1
+    git checkout $1
 }
 v() {
     vim "$*"
 }
 fn() {
     find . -name *"$*"*
-}
-fj() {
-    find ./snapchat/app/src/main -name *"$*"*.java
 }
 gb() {
     if [ $# -eq 0 ]; then
@@ -49,21 +63,33 @@ gb() {
         git for-each-ref --sort=-committerdate refs/heads/ | head -n $1
     fi
 }
+c() {
+    $* | pbcopy
+}
+gl() {
+    if [ $# -eq 0 ]; then
+        git log -n 1 $*
+    else
+        git log -n $1 $2
+    fi
+}
+# git push origin current-branch
+gpo() {
+    git push origin `git symbolic-ref --short -q HEAD`
+}
 bp() {
     $* &>/dev/null &
-}
-bpi() {
-    bp pod install
-}
-bpu() {
-    bp pod update
 }
 ofc() {
     pkill -9 Xcode
 }
 lines() {
-    echo +`git diff | grep ^+ | wc -l`
-    echo -`git diff | grep ^- | wc -l`
+    echo dirty
+    echo +`git diff $1 | grep ^+ | wc -l`
+    echo -`git diff $1 | grep ^- | wc -l`
+    echo cached
+    echo +`git diff --cached $1 | grep ^+ | wc -l`
+    echo -`git diff --cached $1 | grep ^- | wc -l`
 }
 todo() {
     git grep "TODO\|FIXME\|XXX" | grep -v "Binary file"
