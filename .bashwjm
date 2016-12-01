@@ -12,7 +12,7 @@ parse_git_dirty() {
   TOP=$(git rev-parse --show-toplevel 2>/dev/null)
   if [[ -d .git ]] && [[ $TOP != $HOME ]] && [[ $TOP != "$HOME/projects/gcc" ]]; then
     CLEAN=$(git status | tail -n1)
-    [[ $CLEAN != "nothing to commit (working directory clean)" ]] && [[ $CLEAN != "nothing to commit, working directory clean" ]] && echo "*"
+    [[ $CLEAN != "nothing to commit (working directory clean)" ]] && [[ $CLEAN != "nothing to commit, working directory clean" ]] && [[ $CLEAN != "nothing to commit, working tree clean" ]] && echo "*"
   fi
 }
 
