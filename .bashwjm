@@ -32,6 +32,7 @@ alias gmo='git merge origin/master'
 alias gom='gfom && gmo'
 alias gc='git checkout'
 alias gcm='git checkout master'
+alias gcb='git checkout -b'
 alias gou='git fetch origin `git symbolic-ref --short -q HEAD` && git merge origin/`git symbolic-ref --short -q HEAD`'
 alias gs='git status'
 cfi() {
@@ -41,6 +42,9 @@ gg() {
     git grep -n "$*"
 }
 ggi() {
+    git grep -i -n "$*"
+}
+ggim() {
     git grep -h "import .*$*" | head -n 1
 }
 ff() {
@@ -93,5 +97,8 @@ lines() {
 }
 todo() {
     git grep "TODO\|FIXME\|XXX" | grep -v "Binary file"
+}
+so() {
+    source ~/.bashrc && clear
 }
 . ~/z/z.sh
