@@ -101,4 +101,5 @@ todo() {
 so() {
     source ~/.bashrc && clear
 }
+type wget 2>/dev/null || alias wget="curl -O"
 . ~/z/z.sh
