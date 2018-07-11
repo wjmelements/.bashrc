@@ -2,7 +2,7 @@
 git config status.showuntrackedfiles no
 git clone git@github.com:rupa/z.git 2>/dev/null && echo -e "\033[0;32mz cloned\033[0m" || echo "z already cloned"
 
-grep "source ~/.bashwjm" ~/.bashrc >/dev/null || echo "source ~/.bashwjm" >> ~/.bashrc
-grep "so ~/.vimwjm" ~/.vimrc >/dev/null || echo "source ~/.vimwjm" >> ~/.vimrc
+grep "source ~/.bashwjm" ~/.bashrc 2>/dev/null >/dev/null || echo "source ~/.bashwjm" >> ~/.bashrc
+grep "so ~/.vimwjm" ~/.vimrc 2>/dev/null >/dev/null || echo "source ~/.vimwjm" >> ~/.vimrc
 
 source ~/.bashrc
