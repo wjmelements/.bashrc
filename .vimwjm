@@ -12,3 +12,4 @@ set autoindent
 runtime! ftplugin/man.vim
 colorscheme desert
 set shellcmdflag=-ic
+set nrformats+=alpha
