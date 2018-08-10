@@ -36,7 +36,7 @@ alias gcb='git checkout -b'
 alias gou='git fetch origin `git symbolic-ref --short -q HEAD` && git merge origin/`git symbolic-ref --short -q HEAD`'
 alias gs='git status'
 cfi() {
-    clang-format -i "$*"
+    clang-format -i $*
 }
 gg() {
     git grep -n "$*"
@@ -101,5 +101,5 @@ todo() {
 so() {
     source ~/.bashrc && clear
 }
-type wget 2>/dev/null || alias wget="curl -O"
+type wget >/dev/null 2>/dev/null || alias wget="curl -O"
 . ~/z/z.sh
