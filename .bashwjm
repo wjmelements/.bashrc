@@ -11,8 +11,8 @@ parse_git_branch() {
 parse_git_dirty() {
   TOP=$(git rev-parse --show-toplevel 2>/dev/null)
   if [[ -d .git ]] && [[ $TOP != $HOME ]] && [[ $TOP != "$HOME/projects/gcc" ]]; then
-    CLEAN=$(git status | tail -n1)
-    [[ $CLEAN != "nothing to commit (working directory clean)" ]] && [[ $CLEAN != "nothing to commit, working directory clean" ]] && [[ $CLEAN != "nothing to commit, working tree clean" ]] && echo "*"
+    CLEAN=$(git status 2>/dev/null | tail -n1)
+    [[ $CLEAN =~ "nothing to commit" ]] || echo "*"
   fi
 }
 
@@ -24,7 +24,7 @@ export EDITOR=$(which vim)
 export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 
 # aliases
-alias ls='ls -G'
+alias ls='ls -G --color=auto'
 alias mop='ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS'
 alias cf='clang-format'
 alias gfom='git fetch origin master'
