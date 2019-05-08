@@ -1,6 +1,6 @@
 #!/bin/bash
 # modified from https://gist.github.com/atduskgreg/1691176
-PS1="\[\033[01;35m\]\u\[\033[00m\]@\[\033[01;38m\]\$(uname -n):\[\033[00m\]\[\033[01;32m\]\w\[\033[01;33m\]\$(parse_git_branch)\$(parse_git_dirty)\[\033[00m\]$ "
+PS1="\[\033[01;38m\]\$(uname -n):\[\033[00m\]\[\033[01;32m\]\w\[\033[01;33m\]\$(parse_git_branch)\$(parse_git_dirty)\[\033[00m\]$ "
  
 parse_git_branch() {
   if [[ $(git rev-parse --show-toplevel 2>/dev/null) != $HOME ]]; then
@@ -24,7 +24,12 @@ export EDITOR=$(which vim)
 export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 
 # aliases
-alias ls='ls -G --color=auto'
+case "$(uname -s)" in
+    Linux*)     alias ls='ls -G --color=auto';;
+    Darwin*)    alias ls='ls -G';;
+    *)          echo Unsupported operating system
+esac
+alias ip='curl ipinfo.io 2>/dev/null | jq -r .ip'
 alias mop='ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS'
 alias cf='clang-format'
 alias gfom='git fetch origin master'
@@ -103,3 +108,11 @@ so() {
 }
 type wget >/dev/null 2>/dev/null || alias wget="curl -O"
 . ~/z/z.sh
+
+resign() {
+    git rebase --exec 'git commit --amend --no-edit -n -S' -i $@
+}
+
+vg() {
+    vim `git status | sed -n $((4+$1))p | cut -c 14-`
+}
